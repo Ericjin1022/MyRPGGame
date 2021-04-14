@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                Interactable interactable = hit.collider.GetComponent<Interactable>();//右键点击的物体身上是否有interactable脚本
                 if (interactable != null)
                 {
                     SetFocus(interactable);
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    //1.设置本脚本的焦点。2.motor中设置自动寻路的终点
     void SetFocus(Interactable newFocus)
     {
         if(newFocus!=focus)
@@ -60,12 +61,11 @@ public class PlayerController : MonoBehaviour
 
         newFocus.OnFocused(transform);
     }
+    //1.散焦。2.
     void RemoveFocus()
     {
         if(focus!=null)
-            focus = null;
-        
-        focus.OnDefocused();
+            focus.OnDefocused();
         motor.StopFollowingTarget();
     }
 }
